@@ -1,0 +1,17 @@
+{
+  "name": "Fireflies",
+  "version": "0.0.0",
+  "authors": [
+    "Kadi Kraman <hellokadi@gmail.com>"
+  ],
+  "description": "Example of firefly synchronzation.",
+  "main": "index.html",
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}
