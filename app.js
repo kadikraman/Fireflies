@@ -1,22 +1,31 @@
-var width = 500;
-var height = 200;
-
-var fireflies = [
-    { x: 50, y: 50, state: Math.floor((Math.random() * 10)) },
-    { x: 50, y: 100, state: Math.floor((Math.random() * 10)) },
-    { x: 50, y: 150, state: Math.floor((Math.random() * 10)) },
-    { x: 100, y: 50, state: Math.floor((Math.random() * 10)) },
-    { x: 100, y: 100, state: Math.floor((Math.random() * 10)) },
-    { x: 100, y: 150, state: Math.floor((Math.random() * 10)) },
-    { x: 150, y: 50, state: Math.floor((Math.random() * 10)) },
-    { x: 150, y: 100, state: Math.floor((Math.random() * 10)) },
-    { x: 150, y: 150, state: Math.floor((Math.random() * 10)) }
-];
+/* constants */
+var width = 1000;
+var height = 600;
+var padding = 20;
+var numFireflies = 100;
+var numStates = 10;
 
 var svg = d3.select('#container')
-            .append('svg')
-            .attr('width', width)
-            .attr('height', height);
+    .append('svg')
+    .attr('width', width)
+    .attr('height', height);
+
+/* Generate our random set of fireflies */
+var fireflies = [];
+for (var i = 0; i < numFireflies; i++){
+    fireflies.push({
+            x: getRandomInt(padding, width - padding),
+            y: getRandomInt(padding, height - padding),
+        state: Math.round(Math.random() * numStates)
+    })
+}
+
+/* Generates a random integer in a range */
+function getRandomInt(min, max) {
+    return Math.floor(Math.random() * (max - min + 1)) + min;
+}
+
+
 
 function redraw(){
     svg.selectAll('circle')
