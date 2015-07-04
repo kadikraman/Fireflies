@@ -1,27 +1,47 @@
-/* constants */
+/* variables to use throughout */
 var width = window.innerWidth;
 var height = window.innerHeight;
 var padding = 20;
 var numFireflies = 500;
+var speed = 250;
 var maxState = 9;
 var influenceRadius = 100;
+var svg = getSvg();
+var fireflies = generateFireflies();
 
-var svg = d3.select('#container')
-    .append('svg')
-    .attr('width', width)
-    .attr('height', height);
+/* Initial loading */
+load();
 
-/* Generate our random set of fireflies */
-var fireflies = [];
-for (var i = 0; i < numFireflies; i++){
-    fireflies.push({
-            x: getRandomInt(padding, width - padding),
-            y: getRandomInt(padding, height - padding),
-        state: Math.round(Math.random() * maxState)
-    })
+/* Resets the simulation */
+function load(){
+    width = window.innerWidth;
+    height = window.innerHeight;
+    numFireflies = document.getElementById('inputNumFireflies').value;
+    speed = document.getElementById('inputSpeed').value;
+    svg = getSvg();
+    fireflies = generateFireflies();
 }
 
-/* Generates a random integer in a range */
+function getSvg() {
+    return d3.select('#fireflies')
+        .attr('width', width)
+        .attr('height', height);
+}
+
+function generateFireflies() {
+    /* Generate our random set of fireflies */
+    var fireflies = [];
+    for (var i = 0; i < numFireflies; i++) {
+        fireflies.push({
+            x: getRandomInt(padding, width - padding),
+            y: getRandomInt(padding, height - padding),
+            state: Math.round(Math.random() * maxState)
+        })
+    }
+    return fireflies;
+}
+
+/* Helper method. Generates a random integer in a range */
 function getRandomInt(min, max) {
     return Math.floor(Math.random() * (max - min + 1)) + min;
 }
@@ -74,7 +94,7 @@ function redraw(){
 }
 
 /*
-At each time step, find all fireflies that have just blinked and add record their influence range
+Interval to calculate the next step for the firefly
  */
 window.setInterval(function(){
 
@@ -94,7 +114,7 @@ window.setInterval(function(){
 
     /*
     When calculating the next state, if the firefly's current state is 6 or under AND it is in the influence range,
-    the next time step it will reset to zero.
+    the next time step it will load to zero.
      */
     fireflies.forEach(function(firefly){
         if(firefly.state === maxState){
@@ -116,4 +136,4 @@ window.setInterval(function(){
     svg.selectAll('circle').remove();
     svg.selectAll('text').remove();
     redraw();
-}, 250);
+}, speed);
