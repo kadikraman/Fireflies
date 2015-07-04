@@ -1,7 +1,13 @@
+body {
+    background-color: black;
+}
+
 .firefly{
     fill: gray;
+    opacity: 0.5;
 }
 
 .blink{
     fill: yellow;
+    opacity: 0.5;
 }
