@@ -59,6 +59,9 @@
                 <li>
                     <a class="page-scroll" href="#about2">How does it work?</a>
                 </li>
+                <li>
+                    <a href="https://github.com/kadikraman/Fireflies">Github</a>
+                </li>
             </ul>
         </div>
         <!-- /.navbar-collapse -->
@@ -80,8 +83,8 @@
         <div class="" style="position:absolute; z-index: 1000; top:100px; left: 150px; width: 250px;">
             <a class="settings-button" onclick="toggleFilters()"><i class="fa fa-cogs fa-4x"></i> <h1>Settings</h1></a>
             <div id="settings" style="display: none;">
-                <h4>Number of fireflies:</h4> <input type="range" id='inputNumFireflies' min=1 max=2000 value=500><br/>
-                <h4>Speed:</h4> <input type="range" id='inputSpeed' min=50 max=1000 value=250><br/>
+                <h4>Number of fireflies [<span data-bind="text: numFireflies"></span>]:</h4> <input type="range" id='inputNumFireflies' min=1 max=2000 data-bind="value: numFireflies"><br/>
+                <h4>Speed [<span data-bind="text: speed"></span>]:</h4> <input type="range" id='inputSpeed' min=50 max=1000 data-bind="value: speed" ><br/>
                 <h4 class="reload-button" onclick="load()">Reload!</h4>
             </div>
         </div>
@@ -133,6 +136,9 @@
 
 <!-- Plugin JavaScript -->
 <script src="bower_components/jquery.easing/js/jquery.easing.min.js"></script>
+
+<!-- Knockout! -->
+<script src="bower_components/knockout/dist/knockout.js"></script>
 
 <!-- Custom Theme JavaScript -->
 <script src="js/grayscale.js"></script>

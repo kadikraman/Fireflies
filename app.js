@@ -9,6 +9,21 @@ var influenceRadius = 100;
 var svg = getSvg();
 var fireflies = generateFireflies();
 
+function ViewModel(){
+    this.numFireflies = ko.observable(numFireflies);
+    this.speed = ko.observable(speed);
+    this.numFireflies.subscribe(function(val){
+        numFireflies = val;
+        load();
+    });
+    this.speed.subscribe(function(val){
+        speed = val;
+        load();
+    });
+};
+
+ko.applyBindings(new ViewModel());
+
 function toggleFilters(){
     var settings = $('#settings');
     if(settings.css('display') === 'none'){
