@@ -19,6 +19,7 @@
     <link rel="stylesheet" href="css/style.css">
 
     <!-- Custom Fonts -->
+    <link href="bower_components/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
     <link href='http://fonts.googleapis.com/css?family=Architects+Daughter' rel='stylesheet' type='text/css'>
     <link href='http://fonts.googleapis.com/css?family=Lato:300' rel='stylesheet' type='text/css'>
 
@@ -68,18 +69,22 @@
 <!-- Intro Header -->
 <header class="intro">
     <div class="intro-body">
-            <div class="row">
+        <div class="row">
                     <div id="container">
-                        <div id="settings">
-                            <h1>Fireflies!</h1>
-                            <p>Adjust the number of </p>
-                            Number of fireflies: <input type="range" id='inputNumFireflies' min=1 max=2000 value=500><br/>
-                            Speed: <input type="range" id='inputSpeed' min=50 max=1000 value=250><br/>
-                            <button onclick="load()">Reload!</button>
-                        </div>
                         <svg id="fireflies"></svg>
                     </div>
+                <a class="settings-button" onclick="toggleFilters()">
+                    <i class="fa fa-cogs fa-4x"></i>
+                </a>
             </div>
+        <div class="" style="position:absolute; z-index: 1000; top:100px; left: 150px; width: 250px;">
+            <a class="settings-button" onclick="toggleFilters()"><i class="fa fa-cogs fa-4x"></i> <h1>Settings</h1></a>
+            <div id="settings" style="display: none;">
+                <h4>Number of fireflies:</h4> <input type="range" id='inputNumFireflies' min=1 max=2000 value=500><br/>
+                <h4>Speed:</h4> <input type="range" id='inputSpeed' min=50 max=1000 value=250><br/>
+                <h4 class="reload-button" onclick="load()">Reload!</h4>
+            </div>
+        </div>
         </div>
 </header>
 

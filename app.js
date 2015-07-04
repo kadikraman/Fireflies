@@ -9,6 +9,16 @@ var influenceRadius = 100;
 var svg = getSvg();
 var fireflies = generateFireflies();
 
+function toggleFilters(){
+    var settings = $('#settings');
+    if(settings.css('display') === 'none'){
+        settings.css('display', 'block')
+    }
+    else{
+        settings.css('display', 'none')
+    }
+}
+
 /* Initial loading */
 load();
 

@@ -46,7 +46,7 @@ p {
 }
 
 a {
-    color: #42dca3;
+    color: yellowgreen;
     -webkit-transition: all .2s ease-in-out;
     -moz-transition: all .2s ease-in-out;
     transition: all .2s ease-in-out;
@@ -55,7 +55,7 @@ a {
 a:hover,
 a:focus {
     text-decoration: none;
-    color: #1d9b6c;
+    color: #ffff00;
 }
 
 .light {
@@ -148,7 +148,6 @@ a:focus {
     padding: 100px 0;
     text-align: center;
     color: #fff;
-    background: url(../img/intro-bg.jpg) no-repeat bottom center scroll;
     background-color: #000;
     -webkit-background-size: cover;
     -moz-background-size: cover;
@@ -306,17 +305,17 @@ a:focus {
 }
 
 .btn-default {
-    border: 1px solid #42dca3;
-    color: #42dca3;
+    border: 1px solid #ffff00;
+    color: #ffff00;
     background-color: transparent;
 }
 
 .btn-default:hover,
 .btn-default:focus {
-    border: 1px solid #42dca3;
+    border: 1px solid #ffff00;
     outline: 0;
     color: #000;
-    background-color: #42dca3;
+    background-color: #ffff00;
 }
 
 ul.banner-social-buttons {
@@ -371,4 +370,25 @@ img::-moz-selection {
 
 body {
     webkit-tap-highlight-color: rgba(255,255,255,.2);
+}
+
+.settings-button {
+    color: #ffffff;
+}
+
+.settings-button:hover{
+    color: #ffff00;
+    cursor: pointer;
+}
+
+.reload-button {
+    color: #ffffff;
+    border: 1px solid white;
+    border-radius: 5px;
+    background-color: gray;
+}
+
+.reload-button:hover{
+    color: #ffff00;
+    cursor: pointer;
 }
