@@ -8,6 +8,7 @@ var maxState = 9;
 var fireflyRadius = 5;
 var influenceRadius = 100;
 var showState = false;
+var moving = false;
 var svg = getSvg();
 var fireflies = generateFireflies();
 
@@ -78,6 +79,9 @@ function getRandomInt(min, max) {
 
 /* Draws the fireflies */
 function redraw(){
+    svg.selectAll('circle').remove();
+    svg.selectAll('text').remove();
+
     svg.selectAll('circle')
         .data(fireflies)
         .enter()
@@ -162,8 +166,6 @@ var interval = function () {
             firefly.state += 1;
         }
     });
-    svg.selectAll('circle').remove();
-    svg.selectAll('text').remove();
     redraw();
 };
 
@@ -173,4 +175,31 @@ var startInterval = setInterval(interval, speed);
 /* Stops the interval */
 function stopInterval() {
     clearInterval(startInterval);
+}
+
+/* Interval for moving the fireflies */
+var movementInterval = function() {
+    var xchange = 0;
+    var ychange = 0;
+    fireflies.forEach(function (firefly) {
+        xchange = getRandomInt(-10, 10);
+        ychange = getRandomInt(-10, 10);
+        firefly.x = firefly.x + xchange;
+        firefly.y = firefly.y + ychange;
+    });
+    redraw();
+};
+
+
+var startMovementInterval;
+
+function toggleMovement(){
+    if(moving){
+        clearInterval(startMovementInterval);
+        moving = false;
+    }
+    else{
+        startMovementInterval = setInterval(movementInterval, 100);
+        moving = true;
+    }
 }
