@@ -1,8 +1,8 @@
 /* variables to use throughout */
-var width = window.innerWidth;
+var width = window.innerWidth-20;
 var height = window.innerHeight;
 var padding = 20;
-var numFireflies = 500;
+var numFireflies = 200;
 var speed = 250;
 var maxState = 9;
 var fireflyRadius = 5;
@@ -42,7 +42,7 @@ load();
 
 /* Resets the simulation */
 function load(){
-    width = window.innerWidth;
+    width = window.innerWidth-20;
     height = window.innerHeight;
     numFireflies = document.getElementById('inputNumFireflies').value;
     speed = document.getElementById('inputSpeed').value;
