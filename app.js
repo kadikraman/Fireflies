@@ -30,10 +30,10 @@ ko.applyBindings(new ViewModel());
 function toggleFilters(){
     var settings = $('#settings');
     if(settings.css('display') === 'none'){
-        settings.css('display', 'block')
+        settings.css('display', 'block');
     }
     else{
-        settings.css('display', 'none')
+        settings.css('display', 'none');
     }
 }
 
@@ -48,8 +48,6 @@ function load(){
     speed = document.getElementById('inputSpeed').value;
     svg = getSvg();
     fireflies = generateFireflies();
-    stopInterval();
-    startInterval = setInterval(interval, speed);
 }
 
 function getSvg() {
@@ -66,7 +64,7 @@ function generateFireflies() {
             x: getRandomInt(padding, width - padding),
             y: getRandomInt(padding, height - padding),
             state: Math.round(Math.random() * maxState)
-        })
+        });
     }
     return fireflies;
 }
@@ -87,29 +85,35 @@ function redraw(){
         .enter()
         .append('circle')
         .attr('class', function(d){
-            if(d.state == 9){
-                return 'blink'
+            if(d.state === 9){
+                return 'blink';
             }
             else{
-                return 'firefly'
+                return 'firefly';
             }
         })
         .attr('cx', function(d){
-            return d.x
+            return d.x;
         })
         .attr('cy', function(d){
-            return d.y
+            return d.y;
         })
         .attr('r', fireflyRadius)
         .transition()
-        .attr('r', function(d){
-            if(d.state === 9){
-                return 20;
-            }
-            else{
+            .duration(speed/2)
+            .attr('r', function(d){
+                if(d.state === 9){
+                    return 20;
+                }
+                else{
+                    return fireflyRadius;
+                }
+            })
+        .transition()
+            .duration(speed/2)
+            .attr('r', function(d){
                 return fireflyRadius;
-            }
-        });
+            });
 
     if(showState){
         svg.selectAll('text')
@@ -124,12 +128,12 @@ function redraw(){
             })
             .attr('y', function(d){
                 return d.y;
-            })
+            });
     }
 }
 
 /* Interval which calculates the next state of the fireflies */
-var interval = function () {
+var nextFireflyIteration = function () {
 
     /*
      Record all if the current influence ranges
@@ -141,7 +145,7 @@ var interval = function () {
             influenceRanges.push({
                 x: [firefly.x - influenceRadius, firefly.x + influenceRadius],
                 y: [firefly.y - influenceRadius, firefly.y + influenceRadius]
-            })
+            });
         }
     });
 
@@ -167,39 +171,36 @@ var interval = function () {
         }
     });
     redraw();
+    setTimeout(nextFireflyIteration, speed);
 };
 
-/* Initial interval */
-var startInterval = setInterval(interval, speed);
-
-/* Stops the interval */
-function stopInterval() {
-    clearInterval(startInterval);
-}
+/* Sets the initial timeout */
+setTimeout(nextFireflyIteration, speed);
 
 /* Interval for moving the fireflies */
-var movementInterval = function() {
+var moveFirefly = function() {
     var xchange = 0;
     var ychange = 0;
     fireflies.forEach(function (firefly) {
-        xchange = getRandomInt(-10, 10);
-        ychange = getRandomInt(-10, 10);
+        xchange = getRandomInt(-5, 5);
+        ychange = getRandomInt(-5, 5);
         firefly.x = firefly.x + xchange;
         firefly.y = firefly.y + ychange;
     });
     redraw();
+
+    if(moving){
+        setTimeout(moveFirefly, 100);
+    }
 };
 
-
-var startMovementInterval;
-
+/* Handles the toggle movement button click */
 function toggleMovement(){
     if(moving){
-        clearInterval(startMovementInterval);
         moving = false;
     }
     else{
-        startMovementInterval = setInterval(movementInterval, 100);
+        setTimeout(moveFirefly, 100);
         moving = true;
     }
 }
