@@ -48,8 +48,6 @@ function load(){
     speed = document.getElementById('inputSpeed').value;
     svg = getSvg();
     fireflies = generateFireflies();
-    stopInterval();
-    startInterval = setInterval(interval, speed);
 }
 
 function getSvg() {
@@ -129,7 +127,7 @@ function redraw(){
 }
 
 /* Interval which calculates the next state of the fireflies */
-var interval = function () {
+var nextFireflyIteration = function () {
 
     /*
      Record all if the current influence ranges
@@ -167,39 +165,36 @@ var interval = function () {
         }
     });
     redraw();
+    setTimeout(nextFireflyIteration, speed);
 };
 
-/* Initial interval */
-var startInterval = setInterval(interval, speed);
-
-/* Stops the interval */
-function stopInterval() {
-    clearInterval(startInterval);
-}
+/* Sets the initial timeout */
+setTimeout(nextFireflyIteration, speed);
 
 /* Interval for moving the fireflies */
-var movementInterval = function() {
+var moveFirefly = function() {
     var xchange = 0;
     var ychange = 0;
     fireflies.forEach(function (firefly) {
-        xchange = getRandomInt(-10, 10);
-        ychange = getRandomInt(-10, 10);
+        xchange = getRandomInt(-5, 5);
+        ychange = getRandomInt(-5, 5);
         firefly.x = firefly.x + xchange;
         firefly.y = firefly.y + ychange;
     });
     redraw();
+
+    if(moving){
+        setTimeout(moveFirefly, 100);
+    }
 };
 
-
-var startMovementInterval;
-
+/* Handles the toggle movement button click */
 function toggleMovement(){
     if(moving){
-        clearInterval(startMovementInterval);
         moving = false;
     }
     else{
-        startMovementInterval = setInterval(movementInterval, 100);
+        setTimeout(moveFirefly, 100);
         moving = true;
     }
 }
