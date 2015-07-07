@@ -100,14 +100,20 @@ function redraw(){
         })
         .attr('r', fireflyRadius)
         .transition()
-        .attr('r', function(d){
-            if(d.state === 9){
-                return 20;
-            }
-            else{
+            .duration(speed/2)
+            .attr('r', function(d){
+                if(d.state === 9){
+                    return 20;
+                }
+                else{
+                    return fireflyRadius;
+                }
+            })
+        .transition()
+            .duration(speed/2)
+            .attr('r', function(d){
                 return fireflyRadius;
-            }
-        });
+            });
 
     if(showState){
         svg.selectAll('text')
