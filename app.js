@@ -30,10 +30,10 @@ ko.applyBindings(new ViewModel());
 function toggleFilters(){
     var settings = $('#settings');
     if(settings.css('display') === 'none'){
-        settings.css('display', 'block')
+        settings.css('display', 'block');
     }
     else{
-        settings.css('display', 'none')
+        settings.css('display', 'none');
     }
 }
 
@@ -66,7 +66,7 @@ function generateFireflies() {
             x: getRandomInt(padding, width - padding),
             y: getRandomInt(padding, height - padding),
             state: Math.round(Math.random() * maxState)
-        })
+        });
     }
     return fireflies;
 }
@@ -87,18 +87,18 @@ function redraw(){
         .enter()
         .append('circle')
         .attr('class', function(d){
-            if(d.state == 9){
-                return 'blink'
+            if(d.state === 9){
+                return 'blink';
             }
             else{
-                return 'firefly'
+                return 'firefly';
             }
         })
         .attr('cx', function(d){
-            return d.x
+            return d.x;
         })
         .attr('cy', function(d){
-            return d.y
+            return d.y;
         })
         .attr('r', fireflyRadius)
         .transition()
@@ -124,7 +124,7 @@ function redraw(){
             })
             .attr('y', function(d){
                 return d.y;
-            })
+            });
     }
 }
 
@@ -141,7 +141,7 @@ var interval = function () {
             influenceRanges.push({
                 x: [firefly.x - influenceRadius, firefly.x + influenceRadius],
                 y: [firefly.y - influenceRadius, firefly.y + influenceRadius]
-            })
+            });
         }
     });
 
