@@ -1,5 +1,7 @@
 # Firefly Synchronization
 
+[![Code Climate](https://codeclimate.com/github/kadikraman/CarExpensesAPI/badges/gpa.svg)](https://codeclimate.com/github/kadikraman/CarExpensesAPI)
+
 Firefly synchronization simulation with d3.js
 
 ## Setting up
