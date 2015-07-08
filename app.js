@@ -2,7 +2,7 @@
 var width = window.innerWidth-20;
 var height = window.innerHeight;
 var padding = 20;
-var numFireflies = 200;
+var numFireflies = Math.round(width * height * 0.0005);
 var speed = 250;
 var maxState = 9;
 var fireflyRadius = 5;
