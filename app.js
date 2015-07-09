@@ -2,7 +2,7 @@
 var width = window.innerWidth-20;
 var height = window.innerHeight;
 var padding = 20;
-var numFireflies = 200;
+var numFireflies = Math.round(width * height * 0.0005);
 var speed = 250;
 var maxState = 9;
 var fireflyRadius = 5;
@@ -10,18 +10,22 @@ var influenceRadius = 100;
 var showState = false;
 var moving = false;
 var svg = getSvg();
-var fireflies = generateFireflies();
+var fireflies = [];
 
 function ViewModel(){
     this.numFireflies = ko.observable(numFireflies);
     this.speed = ko.observable(speed);
     this.numFireflies.subscribe(function(val){
+        if(numFireflies < val){
+            fireflies = fireflies.concat(generateFireflies(val-numFireflies));
+        }
+        else if(numFireflies > val){
+            fireflies = fireflies.slice(0, val-1);
+        }
         numFireflies = val;
-        load();
     });
     this.speed.subscribe(function(val){
         speed = val;
-        load();
     });
 }
 
@@ -47,7 +51,7 @@ function load(){
     numFireflies = document.getElementById('inputNumFireflies').value;
     speed = document.getElementById('inputSpeed').value;
     svg = getSvg();
-    fireflies = generateFireflies();
+    fireflies = generateFireflies(numFireflies);
 }
 
 function getSvg() {
@@ -56,10 +60,10 @@ function getSvg() {
         .attr('height', height);
 }
 
-function generateFireflies() {
+function generateFireflies(amount) {
     /* Generate our random set of fireflies */
     var fireflies = [];
-    for (var i = 0; i < numFireflies; i++) {
+    for (var i = 0; i < amount; i++) {
         fireflies.push({
             x: getRandomInt(padding, width - padding),
             y: getRandomInt(padding, height - padding),
